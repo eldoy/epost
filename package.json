@@ -1,0 +1,25 @@
+{
+  "name": "epost",
+  "version": "0.1.0",
+  "description": "Send emails with Mailgun",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "nodemon test/run.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eldoy/epost.git"
+  },
+  "author": "Vidar Eldøy <vidar@eldoy.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eldoy/epost/issues"
+  },
+  "homepage": "https://github.com/eldoy/epost#readme",
+  "dependencies": {
+    "mailgun.js": "^10.2.1"
+  }
+}
