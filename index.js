@@ -10,8 +10,6 @@ module.exports = function (config = {}) {
 
   config = { ...defaultConfig, ...config }
 
-  console.log(config)
-
   var {
     apikey = process.env.MAILGUN_API_KEY,
     domain = process.env.MAILGUN_DOMAIN,
