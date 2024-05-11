@@ -1,1 +1,1 @@
-require('./epost-test.js')
+require('./wriggler-test.js')

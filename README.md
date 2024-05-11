@@ -1,16 +1,16 @@
-# Epost
+# Wrigger
 
-Send messages with Mailgun.
+Send messages with the Mailgun API.
 
 ### Install
 
 ```js
-npm i epost
+npm i wriggler
 ```
 
 ### Setup
 
-Add your default credentials to `epost.json` in your app's root folder:
+Add your default credentials to `mail.json` in your app's root folder:
 ```js
 {
   "apikey": "",
@@ -26,7 +26,7 @@ Add your default credentials to `epost.json` in your app's root folder:
 ### Usage
 
 ```js
-var epost = require('epost')
+var wriggler = require('wriggler')
 
 // Default config
 var config = {
@@ -36,7 +36,7 @@ var config = {
   sandbox: {}
 }
 
-var client = epost(config)
+var client = wriggler(config)
 
 // Send message
 var result = await client.send({
