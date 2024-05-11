@@ -5,7 +5,7 @@ var mailgun = new Mailgun(formData)
 module.exports = function (config = {}) {
   var defaultConfig = {}
   try {
-    defaultConfig = require('./mailgun.json')
+    defaultConfig = require('./epost.json')
   } catch (e) {}
 
   config = { ...defaultConfig, ...config }
