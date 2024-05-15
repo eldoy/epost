@@ -1,6 +1,6 @@
 {
   "name": "wriggler",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Send emails with Mailgun",
   "main": "index.js",
   "directories": {
