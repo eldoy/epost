@@ -1,35 +1,43 @@
-var formData = require('form-data')
 var Mailgun = require('mailgun.js')
+var formData = require('form-data')
 var mailgun = new Mailgun(formData)
 
+var regions = {
+  us: 'https://api.mailgun.net',
+  eu: 'https://api.eu.mailgun.net'
+}
+
 module.exports = function (config = {}) {
-  var defaultConfig = {}
+  var CONFIG = {}
   try {
-    defaultConfig = require('./mail.json')
+    CONFIG = require('./mail.json')
   } catch (e) {}
 
-  config = { ...defaultConfig, ...config }
+  config = { ...CONFIG, ...config }
 
   var {
     apikey = process.env.MAILGUN_API_KEY,
     domain = process.env.MAILGUN_DOMAIN,
     from = 'test@example.com',
+    region = 'us',
     sandbox = {}
   } = config
 
   if (config.test) {
-    var { domain, from } = sandbox
+    var { apikey, domain, from, region } = sandbox
   }
 
-  var mg = mailgun.client({ username: 'api', key: apikey })
+  var mg = mailgun.client({
+    username: 'api',
+    key: apikey,
+    url: regions[region]
+  })
 
   async function send(options = {}) {
-    // TODO: auto-translate text to HTML if html is missing
     options = { from, subject: 'No subject', ...options }
 
     if (config.test) {
       options = {
-        to: 'vidar@eldoy.com',
         subject: 'Hello',
         text: 'Testing mailer',
         html: '<h1>Testing mailer!</h1>',
@@ -46,7 +54,13 @@ module.exports = function (config = {}) {
     //   html: '<h1>Testing mailer</h1>'
     // }
 
-    var message = await mg.messages.create(domain, options)
+    var message
+    try {
+      message = await mg.messages.create(domain, options)
+    } catch (e) {
+      console.error(e)
+      message = e
+    }
 
     return message
   }
